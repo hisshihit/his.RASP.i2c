@@ -11,7 +11,7 @@
     ケース外に引き出すことができる。
     そこからブレッドボードに繋いでセンサーモジュールを接続してみた。
 <p align="center">
-	<img src="./APDS9960+BME280-1.jpg" width="75%" />
+	<img src="./BME280+APDS9660-1.jpg" width="75%" />
 	<img src="./APDS9960+BME280-2.jpg" width="75%" />
 </p>
 
