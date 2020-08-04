@@ -44,7 +44,7 @@
 ## 実行結果
     下記１行を標準出力に出して終わる。
 <pre>
-    { place : "home" ,  time : "2020-08-02T11:58:17Z" ,  "AmbientLight" : 151 ,  "red" :33 ,  "green" :28 ,  "blue" :26 }
+    { "place" : "home" ,  "time" : "2020-08-02T11:58:17Z" ,  "AmbientLight" : 151 ,  "red" :33 ,  "green" :28 ,  "blue" :26 }
 </pre>
 
 ## 今後の予定
