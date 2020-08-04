@@ -40,3 +40,14 @@
     # apt install python3-smbus python3-pip
     # python3 -m pip install apds9960
     # python3 -m pip install  RPi.GPIO
+
+## 実行結果
+    下記１行を標準出力に出して終わる。
+<pre>
+    { place : "home" ,  time : "2020-08-02T11:58:17Z" ,  "AmbientLight" : 151 ,  "red" :33 ,  "green" :28 ,  "blue" :26 }
+</pre>
+
+## 今後の予定
+    crontabで10分ごとに動作させて、ファイルにためておく。
+    node.jsとmongoDBで作ったサービスに結果を登録し、Chart.jsなどでグラフ化する。
+    もともとAPDS9660はジェスチャーセンサーなんだが、その機能は使う予定なし。
