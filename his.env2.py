@@ -8,6 +8,7 @@ import time
 
 bus_number = 1
 i2c_address = 0x76
+#i2c_address = 0x77
 
 bus = SMBus(bus_number)
 path = '/sys/class/thermal/thermal_zone0/temp'
@@ -77,7 +78,7 @@ def readData():
     print(outstring, end="")
     with open(path) as f:
         tcpu = float(f.read()) / 1000.0
-        print("\"cpu\": {:.1f} ,".format(tcpu), end='')
+        print("\"cpu\": {:.1f} , ".format(tcpu), end='')
     compensate_T(temp_raw)
     compensate_H(hum_raw)
     compensate_P(pres_raw)
