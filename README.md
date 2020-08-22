@@ -119,13 +119,25 @@ red" :863 , "green" :978 , "blue" :1109  , "cpu": 40.1 , "temp": 35.2 , "humid":
 <a href="./html/Log.txt">Log.txt</a>
 
 # 4.JSON形式ファイルの内容を可視化
-## 4.1 <a href="./html/index.html">index.html</a>
+
+## 4.1 前提ソフト
+https://github.com/c3js/c3 から必要なものを有り難く頂く。
+
+<ul>
+	<li>https://github.com/c3js/c3/blob/master/c3.css</li>
+	<li>https://github.com/c3js/c3/blob/master/c3.js</li>
+</ul>
+
+c3.jsはさらにd3.jsを前提としている。
+https://github.com/d3/d3#installing
+
+## 4.2 <a href="./html/index.html">index.html</a>
 c3.jsを使ったグラフ表示を行うための入り口
 
-## 4.2 <a href="./html/c3-test.js">c3-test.js</a>
+## 4.3 <a href="./html/c3-test.js">c3-test.js</a>
 JavaScriptによるグラフ表示スクリプト
 
-## 4.3 出力サンプル
+## 4.4 出力サンプル
 <p align="center">
 	<img src="./c3.js-sampleOutput.png" width="75%" />
 </p>
