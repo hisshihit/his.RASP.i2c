@@ -46,17 +46,19 @@
     60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
     70: -- -- -- -- -- -- 76 --              
 </pre>
-    0x39がAPDS9660
-    0x76がBME280
-
+<ul>
+	<li>0x39がAPDS9660</li>
+	<li>0x76がBME280</li>
+</ul>
 とりあえず、認識されているようだ。
 
 # 2.センサ情報取得
 ## 2.1 前提ソフトウエアのインストール
-
-    # apt install python3-smbus python3-pip
-    # python3 -m pip install apds9960
-    # python3 -m pip install  RPi.GPIO
+<pre>
+# apt install python3-smbus python3-pip
+# python3 -m pip install apds9960
+# python3 -m pip install  RPi.GPIO
+</pre>
 
 ## 2.2 実行結果
 ### <a href="./scripts/his.ambient.py">his.ambient.py</a>
@@ -66,14 +68,14 @@
 { "place" : "home" ,  "time" : "2020-08-22T00:16:01Z" ,  "AmbientLight" : 4398 ,  "red" :1296 ,  "green" :1389 ,  "blue" :1483 }
 </pre>
 
-### his.env2.py
+### <a href="./scripts/his.env2.py">his.env2.py</a>
 環境センサからの取得データを標準出力に出して終わる。
 <pre>
 # python3 ./his.env2.py 
 { "place": "home" , "time": "2020-08-22T00:13:13Z" , "cpu": 39.0 , "temp": 35.1 , "humid": 49.5 , "pressure": 1012.3 }
 </pre>
 
-### his.log.wrap.sh
+### <a href="./scripts/his.log.wrap.sh">his.log.wrap.sh</a>
 ２つのセンサ情報をまとめて、本日付の名前のログファイルに出力するスクリプト。<br>
 スクリプト内で、上記his.ambient.pyとhis.env2.pyを起動し、出力をマージ・整形している。
 
@@ -104,7 +106,7 @@ red" :863 , "green" :978 , "blue" :1109  , "cpu": 40.1 , "temp": 35.2 , "humid":
 </pre>
 
 # 3.出力ファイルをJSON形式に変換
-## log2json.awk
+## <a href="./scripts/log2json.awk">log2json.awk</a>
 標準入力のテキストを、単純にJSON形式に変換して標準出力するawkスクリプト。<br>
 ファイル形式のチェックは行なっていない。つまり、たいしたことはやってない。
 
@@ -115,10 +117,10 @@ red" :863 , "green" :978 , "blue" :1109  , "cpu": 40.1 , "temp": 35.2 , "humid":
 </pre>
 
 # 4.JSON形式ファイルの内容を可視化
-## index.html
+## <a href="./html/index.html">index.html</a>
 c3.jsを使ったグラフ表示を行うための入り口
 
-## c3-test.js
+## <a href="./html/c3-test.js">c3-test.js</a>
 JavaScriptによるグラフ表示スクリプト
 
 ## 出力サンプル
