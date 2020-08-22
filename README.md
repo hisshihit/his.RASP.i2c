@@ -16,7 +16,7 @@
 # 1.センサ接続
 ## 1.1 対象センサ
 <ul>
-	<li>APDS9660使用 光学式ジェスチャーセンサモジュールキット<br>
+	<li>APDS9960使用 光学式ジェスチャーセンサモジュールキット<br>
 	    http://akizukidenshi.com/catalog/g/gK-09754/</li>
 	<li>BME280使用　温湿度・気圧センサモジュールキット<br>
 	    http://akizukidenshi.com/catalog/g/gK-09421/</li>
@@ -27,7 +27,6 @@
     ケース外に引き出すことができる。
     そこからブレッドボードに繋いでセンサモジュールを接続してみた。
 <p align="center">
-	<img src="./BME280+APDS9660-1.jpg" width="75%" />
 	<img src="./APDS9960+BME280-2.jpg" width="75%" />
 </p>
 
@@ -47,7 +46,7 @@
     70: -- -- -- -- -- -- 76 --              
 </pre>
 <ul>
-	<li>0x39がAPDS960</li>
+	<li>0x39がAPDS9960</li>
 	<li>0x76がBME280</li>
 </ul>
 とりあえず、認識されているようだ。
