@@ -13,7 +13,8 @@
 	<li>https://c3js.org/ で可視化する。</li>
 </ol>
  
-# 対象センサ
+# 1.センサ接続
+## 1.1 対象センサ
 <ul>
 	<li>APDS9660使用 光学式ジェスチャーセンサモジュールキット<br>
 	    http://akizukidenshi.com/catalog/g/gK-09754/</li>
@@ -21,8 +22,7 @@
 	    http://akizukidenshi.com/catalog/g/gK-09421/</li>
 </ul>
    
-# 1.センサ接続
-## 1.1 接続概要図
+## 1.2 接続概要図
     ラズパイ4Bは、放熱のためにアルミ合金ケースに入れているが、GPIO(40pin)はフラットケーブルで
     ケース外に引き出すことができる。
     そこからブレッドボードに繋いでセンサモジュールを接続してみた。
@@ -31,7 +31,7 @@
 	<img src="./APDS9960+BME280-2.jpg" width="75%" />
 </p>
 
-## 1.2 接続確認
+## 1.3 接続確認
 <pre>
 # apt install i2c-tools
 # i2cdetect -y 1
@@ -60,26 +60,25 @@
 # python3 -m pip install  RPi.GPIO
 </pre>
 
-## 2.2 実行結果
-### <a href="./scripts/his.ambient.py">his.ambient.py</a>
+## 2.2 <a href="./scripts/his.ambient.py">his.ambient.py</a>
 光センサからの取得データを標準出力に出して終わる。
 <pre>
 # python3 ./his.ambient.py 
 { "place" : "home" ,  "time" : "2020-08-22T00:16:01Z" ,  "AmbientLight" : 4398 ,  "red" :1296 ,  "green" :1389 ,  "blue" :1483 }
 </pre>
 
-### <a href="./scripts/his.env2.py">his.env2.py</a>
+## 2.3 <a href="./scripts/his.env2.py">his.env2.py</a>
 環境センサからの取得データを標準出力に出して終わる。
 <pre>
 # python3 ./his.env2.py 
 { "place": "home" , "time": "2020-08-22T00:13:13Z" , "cpu": 39.0 , "temp": 35.1 , "humid": 49.5 , "pressure": 1012.3 }
 </pre>
 
-### <a href="./scripts/his.log.wrap.sh">his.log.wrap.sh</a>
+## 2.4 <a href="./scripts/his.log.wrap.sh">his.log.wrap.sh</a>
 ２つのセンサ情報をまとめて、本日付の名前のログファイルに出力するスクリプト。<br>
 スクリプト内で、上記his.ambient.pyとhis.env2.pyを起動し、出力をマージ・整形している。
 
-### cronの設定
+## 2.5 cronの設定
 10分ごとにhis.log.wrap.shを起動する。
 <pre>
 # crontab -e
@@ -89,7 +88,7 @@
 */10 * * * * /home/shibata/scripts/his.log.wrap.sh
 </pre>
 
-### ログファイル例
+## 2.6 ログファイル例
 下記のように、1行ごとに2つのセンサ情報を記録している。<br>
 cpu:はRaspberry PiのCPU温度センサの
 
@@ -106,27 +105,30 @@ red" :863 , "green" :978 , "blue" :1109  , "cpu": 40.1 , "temp": 35.2 , "humid":
 </pre>
 
 # 3.出力ファイルをJSON形式に変換
-## <a href="./scripts/log2json.awk">log2json.awk</a>
+## 3.1 <a href="./scripts/log2json.awk">log2json.awk</a>
 標準入力のテキストを、単純にJSON形式に変換して標準出力するawkスクリプト。<br>
 ファイル形式のチェックは行なっていない。つまり、たいしたことはやってない。
 
-## cronの設定
+## 3.2 cronの設定
 毎時07分に上記スクリプトを起動し、所望の場所にファイル出力する。
 <pre>
 7 * * * * cat /home/shibata/his.SensorLogs/Log-2*|/home/shibata/scripts/log2json.awk > /var/www/html/Log.txt
 </pre>
 
+## 3.3 出力ファイル例
+<a href="./html/Log.txt">Log.txt</a>
+
 # 4.JSON形式ファイルの内容を可視化
-## <a href="./html/index.html">index.html</a>
+## 4.1 <a href="./html/index.html">index.html</a>
 c3.jsを使ったグラフ表示を行うための入り口
 
-## <a href="./html/c3-test.js">c3-test.js</a>
+## 4.2 <a href="./html/c3-test.js">c3-test.js</a>
 JavaScriptによるグラフ表示スクリプト
 
-## 出力サンプル
+## 4.3 出力サンプル
 <p align="center">
 	<img src="./c3.js-sampleOutput.png" width="75%" />
 </p>
 
-# 今後の予定
+# 5.今後の予定
 表示対象のデータ範囲を指定できるようにする。
