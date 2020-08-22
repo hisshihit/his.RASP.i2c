@@ -1,10 +1,14 @@
-# his.RASP.i2c
- Python scrips for i2c sensors on Raspberry Pi
+# his.RASP.i2c abstruct
+<ul>
+	<li>Python scrips for i2c sensors on Raspberry Pi</li>
+	<li>script for convert from "test formated log file" to "JSON format"</li>
+	<li>https:/c3.js.org based JavaScript for display line chart</li>
+</ul>
 
 # 概要
  <ol>
 	<li>Rapberry piにi2cでアクセス可能なセンサを接続する。</li>
-	<li>cronで定期的に起動するスクリプトでセンサ情報を取得し、テキスト形式のログファイルに出力する</li>
+	<li>cronで定期的に起動するスクリプトでセンサ情報を取得し、テキスト形式のログファイルに出力する。</li>
 	<li>出力されたファイルをJSON形式に変換する。</li>
 	<li>https://c3js.org/ で可視化する。</li>
 </ol>
