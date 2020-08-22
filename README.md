@@ -59,7 +59,7 @@
     # python3 -m pip install  RPi.GPIO
 
 ## 2.2 実行結果
-### his.ambient.py
+### <a href="./scripts/his.ambient.py">his.ambient.py</a>
 光センサからの取得データを標準出力に出して終わる。
 <pre>
 # python3 ./his.ambient.py 
