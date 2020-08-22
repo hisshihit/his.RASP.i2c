@@ -121,5 +121,10 @@ c3.jsを使ったグラフ表示を行うための入り口
 ## c3-test.js
 JavaScriptによるグラフ表示スクリプト
 
+## 出力サンプル
+<p align="center">
+	<img src="./c3.js-sampleOutput" width="75%" />
+</p>
+
 # 今後の予定
 表示対象のデータ範囲を指定できるようにする。
