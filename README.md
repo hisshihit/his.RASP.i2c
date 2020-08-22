@@ -129,7 +129,10 @@ https://github.com/c3js/c3 から必要なものを有り難く頂く。
 </ul>
 
 c3.jsはさらにd3.jsを前提としている。
-https://github.com/d3/d3#installing
+
+<ul>
+	<li>https://github.com/d3/d3#installing</li>
+</ul>
 
 ## 4.2 <a href="./html/index.html">index.html</a>
 c3.jsを使ったグラフ表示を行うための入り口
@@ -142,5 +145,9 @@ JavaScriptによるグラフ表示スクリプト
 	<img src="./c3.js-sampleOutput.png" width="75%" />
 </p>
 
-# 5.今後の予定
+# 5.お試しサイト
+下記で試験的に公開中。いつ止まるかわかりません。<br>
+http://euqset.org/
+
+# 6.今後の予定
 表示対象のデータ範囲を指定できるようにする。
