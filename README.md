@@ -123,7 +123,7 @@ JavaScriptによるグラフ表示スクリプト
 
 ## 出力サンプル
 <p align="center">
-	<img src="./c3.js-sampleOutput" width="75%" />
+	<img src="./c3.js-sampleOutput.png" width="75%" />
 </p>
 
 # 今後の予定
