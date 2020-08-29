@@ -1,26 +1,20 @@
 # his.RASP.i2c abstruct
-<ul>
-	<li>Python scrips for i2c sensors on Raspberry Pi</li>
-	<li>script for convert from "test formated log file" to "JSON format"</li>
-	<li>https:/c3.js.org based JavaScript for display line chart</li>
-</ul>
+* Python scrips for i2c sensors on Raspberry Pi
+* script for convert from "test formated log file" to "JSON format"
+* https:/c3.js.org based JavaScript for display line chart
 
 # 概要
- <ol>
-	<li>Rapberry piにi2cでアクセス可能なセンサを接続する。</li>
-	<li>cronで定期的に起動するスクリプトでセンサ情報を取得し、テキスト形式のログファイルに出力する。</li>
-	<li>出力されたファイルをJSON形式に変換する。</li>
-	<li>https://c3js.org/ で可視化する。</li>
-</ol>
+1. Rapberry piにi2cでアクセス可能なセンサを接続する。
+1. cronで定期的に起動するスクリプトでセンサ情報を取得し、テキスト形式のログファイルに出力する。
+1. 出力されたファイルをJSON形式に変換する。
+1. https://c3js.org/ で可視化する。
  
 # 1.センサ接続
 ## 1.1 対象センサ
-<ul>
-	<li>APDS9960使用 光学式ジェスチャーセンサモジュールキット<br>
-	    http://akizukidenshi.com/catalog/g/gK-09754/</li>
-	<li>BME280使用　温湿度・気圧センサモジュールキット<br>
-	    http://akizukidenshi.com/catalog/g/gK-09421/</li>
-</ul>
+* APDS9960使用 光学式ジェスチャーセンサモジュールキット
+   http://akizukidenshi.com/catalog/g/gK-09754/
+* BME280使用　温湿度・気圧センサモジュールキット
+   http://akizukidenshi.com/catalog/g/gK-09421/
    
 ## 1.2 接続概要図
     ラズパイ4Bは、放熱のためにアルミ合金ケースに入れているが、GPIO(40pin)はフラットケーブルで
@@ -31,7 +25,7 @@
 </p>
 
 ## 1.3 接続確認
-<pre>
+```
 # apt install i2c-tools
 # i2cdetect -y 1
 
@@ -44,34 +38,34 @@
     50: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
     60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
     70: -- -- -- -- -- -- 76 --              
-</pre>
-<ul>
-	<li>0x39がAPDS9960</li>
-	<li>0x76がBME280</li>
-</ul>
+```
+
+* 0x39がAPDS9960
+* 0x76がBME280
+
 とりあえず、認識されているようだ。
 
 # 2.センサ情報取得
 ## 2.1 前提ソフトウエアのインストール
-<pre>
+```
 # apt install python3-smbus python3-pip
 # python3 -m pip install apds9960
 # python3 -m pip install  RPi.GPIO
-</pre>
+```
 
 ## 2.2 <a href="./scripts/his.ambient.py">his.ambient.py</a>
 光センサからの取得データを標準出力に出して終わる。
-<pre>
+```
 # python3 ./his.ambient.py 
 { "place" : "home" ,  "time" : "2020-08-22T00:16:01Z" ,  "AmbientLight" : 4398 ,  "red" :1296 ,  "green" :1389 ,  "blue" :1483 }
-</pre>
+```
 
 ## 2.3 <a href="./scripts/his.env2.py">his.env2.py</a>
 環境センサからの取得データを標準出力に出して終わる。
-<pre>
+```
 # python3 ./his.env2.py 
 { "place": "home" , "time": "2020-08-22T00:13:13Z" , "cpu": 39.0 , "temp": 35.1 , "humid": 49.5 , "pressure": 1012.3 }
-</pre>
+```
 
 ## 2.4 <a href="./scripts/his.log.wrap.sh">his.log.wrap.sh</a>
 ２つのセンサ情報をまとめて、本日付の名前のログファイルに出力するスクリプト。<br>
@@ -79,19 +73,19 @@
 
 ## 2.5 cronの設定
 10分ごとにhis.log.wrap.shを起動する。
-<pre>
+```
 # crontab -e
-</pre>
+```
 で編集する。
-<pre>
+```
 */10 * * * * /home/shibata/scripts/his.log.wrap.sh
-</pre>
+```
 
 ## 2.6 ログファイル例
 下記のように、1行ごとに2つのセンサ情報を記録している。<br>
-cpu:はRaspberry PiのCPU温度センサの
+cpu:はRaspberry PiのCPU温度センサの値。
 
-<pre>
+```
 { "place" : "home" , "time" : "2020-08-22T00:00:02Z" , "AmbientLight" : 4057 , "
 red" :1156 , "green" :1260 , "blue" :1370  , "cpu": 40.1 , "temp": 35.3 , "humid
 ": 49.3 , "pressure": 1012.4 }
@@ -101,7 +95,7 @@ red" :875 , "green" :989 , "blue" :1115  , "cpu": 40.1 , "temp": 35.1 , "humid":
 { "place" : "home" , "time" : "2020-08-22T00:20:02Z" , "AmbientLight" : 3144 , "
 red" :863 , "green" :978 , "blue" :1109  , "cpu": 40.1 , "temp": 35.2 , "humid":
  49.4 , "pressure": 1012.4 }
-</pre>
+```
 
 # 3.出力ファイルをJSON形式に変換
 ## 3.1 <a href="./scripts/log2json.awk">log2json.awk</a>
@@ -110,9 +104,9 @@ red" :863 , "green" :978 , "blue" :1109  , "cpu": 40.1 , "temp": 35.2 , "humid":
 
 ## 3.2 cronの設定
 毎時07分に上記スクリプトを起動し、所望の場所にファイル出力する。
-<pre>
+```
 7 * * * * cat /home/shibata/his.SensorLogs/Log-2*|/home/shibata/scripts/log2json.awk > /var/www/html/Log.txt
-</pre>
+```
 
 ## 3.3 出力ファイル例
 <a href="./html/Log.txt">Log.txt</a>
@@ -122,16 +116,12 @@ red" :863 , "green" :978 , "blue" :1109  , "cpu": 40.1 , "temp": 35.2 , "humid":
 ## 4.1 前提ソフト
 https://github.com/c3js/c3 から必要なものを有り難く頂く。
 
-<ul>
-	<li>https://github.com/c3js/c3/blob/master/c3.css</li>
-	<li>https://github.com/c3js/c3/blob/master/c3.js</li>
-</ul>
+* https://github.com/c3js/c3/blob/master/c3.css
+* https://github.com/c3js/c3/blob/master/c3.js
 
 c3.jsはさらにd3.jsを前提としている。
 
-<ul>
-	<li>https://github.com/d3/d3#installing</li>
-</ul>
+* https://github.com/d3/d3#installing
 
 ## 4.2 <a href="./html/index.html">index.html</a>
 c3.jsを使ったグラフ表示を行うための入り口
@@ -147,6 +137,7 @@ JavaScriptによるグラフ表示スクリプト
 # 5.お試しサイト
 下記で試験的に公開中。いつ止まるかわかりません。<br>
 http://euqset.org/
+上記サイトは、直近8日間の値を表示している。
 
 # 6.今後の予定
-表示対象のデータ範囲を指定できるようにする。
+* 表示対象のデータ範囲を指定できるようにする。
