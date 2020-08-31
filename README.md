@@ -103,9 +103,15 @@ red" :863 , "green" :978 , "blue" :1109  , "cpu": 40.1 , "temp": 35.2 , "humid":
 ファイル形式のチェックは行なっていない。つまり、たいしたことはやってない。
 
 ## 3.2 cronの設定
-毎時07分に上記スクリプトを起動し、所望の場所にファイル出力する。
+* 毎時07分と37分に起動し、下記の処理を行う。
+* ログファイルは日付ごとのファイル名を持ったものとなっている。
+* ファイル名でソートし、直近の9日分のファイル名を取得する。
+* 9日分のファイルの内容を連結(cat)し、その中からさらに直近の1153行のログを取得する。
+* 尚、1153行の意味は下記。<br>
+  表示期間8日間 × 24時間/日 × 60分/時間 ÷ ログ1行/10分間隔 + 1行 = 1153行
+
 ```
-7 * * * * cat /home/shibata/his.SensorLogs/Log-2*|/home/shibata/scripts/log2json.awk > /var/www/html/Log.txt
+7,37 * * * * cp -au /home/shibata/his.SensorLogs/Log-2* /var/www/euqset.org/Logs/ && (cat `ls -1 /var/www/euqset.org/Logs/Log-*|sort|tail -9`|sort|tail -1153|/home/shibata/scripts/log2json.awk > /var/www/euqset.org/Log.txt)
 ```
 
 ## 3.3 出力ファイル例
